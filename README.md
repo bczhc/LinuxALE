@@ -1,3 +1,7 @@
+# Updates
+
+`-s`: Decode from stdin (s16le 8000 sample rate PCM stream)
+
 # LinuxALE
 
 Official project website: https://sourceforge.net/projects/linuxale/
