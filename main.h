@@ -60,12 +60,13 @@
 #include <fcntl.h>
 #include <sys/types.h>
 #include <sys/ioctl.h>
-#include <linux/soundcard.h>
 #include <math.h>
 #include <stdio.h>
+#include <stdlib.h>
 #include "time.h"
 #include "server.h"
 #include "dblookup.h"
+#include "modem.h"
 
 #define FRAME_SIZE  200
 #define SAMPLE_RATE 8000
@@ -94,7 +95,7 @@ static const char usage_str[] = "LinuxALE version 0.0.2 \n"
 "Demodulates MIL-STD 188-141B ALE (Automatic Link Establishment) mode\n"
 "(C) 2000, 2001 Charles Brain, Ilkka Toivanen, Glenn Valenta\n"
 "  -f <filename> : decode from input file 16-bit 8000 Hz wav\n"
-"  -s            : decode from sound card\n"
+"  -s            : decode from stdin (s16_le@8000Hz PCM input)\n"
 "  -l <filename> : write log file\n"
 "  -v            : silent - no terminal\n"
 "  -g            : enable server function\n"

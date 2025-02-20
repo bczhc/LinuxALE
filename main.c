@@ -82,8 +82,6 @@ int main(int argc, char *argv[])
   int i, c, errflg = 0;
   int fd;                        /* file descriptor of input file */
   int arg;
-  int sndparam;                  /* parameter to use when initializing 
-              			    the sound card */
   int fmt;
   int sample_rate = SAMPLE_RATE; /* sample rate from audio card */
   FILE *log_file = NULL;         /* pointer to log file */
@@ -151,56 +149,9 @@ int main(int argc, char *argv[])
 	  break;
 
 	case 's':
-	  /* Open and initialize the sound card */
-	  if ((fd = open("/dev/dsp", O_RDONLY)) < 0) {
-	    perror("open");
-	    exit (10);
-	  }
+	  /* Decode from stdin PCM */
+      fd = 0;
 
-  
-	  sndparam = AFMT_S16_LE; /* we want 16 bits/sample signed */
-	  /* little endian; works only on little endian systems! */
-	  if (ioctl(fd, SNDCTL_DSP_SETFMT, &sndparam) == -1) {
-	    perror("ioctl: SNDCTL_DSP_SETFMT");
-	    exit (10);
-	  }
-	  if (sndparam != AFMT_S16_LE) {
-	    fmt = 1;
-	    sndparam = AFMT_U8;
-	    if (ioctl(fd, SNDCTL_DSP_SETFMT, &sndparam) == -1) {
-	      perror("ioctl: SNDCTL_DSP_SETFMT");
-	      exit (10);
-	    }
-	    if (sndparam != AFMT_U8) {
-	      perror("ioctl: SNDCTL_DSP_SETFMT");
-	      exit (10);
-	    }
-	  }
-	  sndparam = 0;   /* we want only 1 channel */
-	  if (ioctl(fd, SNDCTL_DSP_STEREO, &sndparam) == -1) {
-	    perror("ioctl: SNDCTL_DSP_STEREO");
-	    exit (10);
-	  }
-	  if (sndparam != 0) {
-	    fprintf(stderr, "soundif: Error, cannot set the channel "
-		    "number to 1\n");
-	    exit (10);
-	  }
-	  sndparam = sample_rate; 
-	  if (ioctl(fd, SNDCTL_DSP_SPEED, &sndparam) == -1) {
-	    perror("ioctl: SNDCTL_DSP_SPEED");
-	    exit (10);
-	  }
-	  if ((10*abs(sndparam-sample_rate)) > sample_rate) {
-	    perror("ioctl: SNDCTL_DSP_SPEED");
-	    exit (10);
-	  }
-	  if (sndparam != sample_rate) {
-	    fprintf(stderr, "Warning: Sampling rate is %u, "
-		    "requested %u\n", sndparam, sample_rate);
-	  }
-	  
-	  
 	  break;
 	default:
 	  errflg++;

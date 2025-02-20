@@ -108,7 +108,7 @@ static const char *CMD_types[] = {
   "[Mode selection]", "[Noise report]"
 };
 
-char ASCII_Set[128] = {
+static char ASCII_Set[128] = {
          0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
          0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
          1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
@@ -119,8 +119,8 @@ char ASCII_Set[128] = {
          0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
 };
 
-const int symbol_lookup[22] = {8,8,8,8,8,8,0,8,1,8,3,8,2,8,6,8,7,8,5,8,4,8};
-const int vote_lookup[4]    = {0,0,1,1};	
+static int symbol_lookup[22] = {8,8,8,8,8,8,0,8,1,8,3,8,2,8,6,8,7,8,5,8,4,8};
+static int vote_lookup[4]    = {0,0,1,1};	
 
 /*
  * FFT information

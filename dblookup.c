@@ -67,6 +67,7 @@ Things to do:
 
 
 #include "dblookup.h"
+#include <stdlib.h>
 
 
 Station_record *station_table;

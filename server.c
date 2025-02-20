@@ -72,6 +72,7 @@ Things to do:
 
 
 #include "server.h"
+#include <string.h>
 
 
 /* Globals */
